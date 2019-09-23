@@ -14,7 +14,7 @@
         <b>Attention</b>
       </div>
       <div class="modal-body">
-        <p>You must be login first.</p>
+        <p id="messageAction">You must be login first.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,6 +164,13 @@
   var baseUrlOrigin = window.location.origin;
 
   $(function(){
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('message')) {
+      console.log(urlParams.get('message'));
+      $('#messageAction').html(urlParams.get('message'));
+      $('#myFirstLogin').modal('show');
+    }
+
     $('#btnRegister').hide();
     $('#btnUpdateRegister').hide();
     
