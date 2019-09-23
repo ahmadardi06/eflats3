@@ -13,17 +13,17 @@ function sendEmail($to, $name, $subject, $body) {
         $mail->isSMTP();                                            // Set mailer to use SMTP
         $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'RIGHTHERE';                     // SMTP username
-        $mail->Password   = 'RIGHTHERE';                               // SMTP password
+        $mail->Username   = 'ahmad.ardi06@gmail.com';               // SMTP username
+        $mail->Password   = '@cakru321743';                         // SMTP password
         $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
         $mail->Port       = 587;                                    // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('RIGHTHERE', 'Mailer');
-        $mail->addAddress($to, $name);     // Add a recipient
+        $mail->setFrom('ahmad.ardi06@gmail.com', 'Mailer');
+        $mail->addAddress($to, $name);                              // Add a recipient
 
         // Content
-        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->isHTML(true);                                        // Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $body;
 

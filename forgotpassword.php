@@ -50,19 +50,19 @@ require 'vendor/autoload.php';
                     $mail->isSMTP();                                            // Set mailer to use SMTP
                     $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                    $mail->Username   = 'RIGHTHERE';                     // SMTP username
-                    $mail->Password   = 'RIGHTHERE';                               // SMTP password
+                    $mail->Username   = 'ahmad.ardi06@gmail.com';                     // SMTP username
+                    $mail->Password   = '@cakru321743';                               // SMTP password
                     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                     $mail->Port       = 587;                                    // TCP port to connect to
 
                     //Recipients
-                    $mail->setFrom('RIGHTHERE', 'Mailer');
+                    $mail->setFrom('ahmad.ardi06@gmail.com', 'Mailer');
                     $mail->addAddress($_POST['email'], 'Customer');     // Add a recipient
 
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Link Update Password';
-                    $mail->Body    = 'http://localhost/'.$BASEAPP.'/api/api.php?action=updatepassword&email='.$_POST['email'];
+                    $mail->Body    = $BASEURL.'/api/api.php?action=updatepassword&email='.$_POST['email'];
 
                     $mail->send();
 
