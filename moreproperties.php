@@ -12,7 +12,7 @@ require 'config/db.php';
     <meta name="author" content="">
     <link rel="icon" href="img/home.jpg">
 
-    <title>Add Properties</title>
+    <title>Detail Properties</title>
 
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -23,16 +23,6 @@ require 'config/db.php';
     <?php include 'navigation.php'; ?>
 
     <div class="container">
-    	<div class="row">
-    		<div class="col-sm-12">
-			<h4>
-              Form Add Properties &nbsp;
-              <a href="/<?= $BASEAPP;?>/manproperties.php" class="btn btn-success">Back</a>
-              <a href="/<?= $BASEAPP;?>/myproperties.php" class="btn btn-primary pull-right">My Properties</a>
-            </h4>
-          <hr>
-        </div>
-      </div>
     
       <div class="row">
         <div class="col-sm-12">
@@ -44,13 +34,20 @@ require 'config/db.php';
             }
             ?>
           <form enctype="multipart/form-data" class="form-horizontal" action="/<?= $BASEAPP;?>/config/processproperties.php" method="post">
-            <h5><b>Information Property</b></h5>
+            <h4>
+                <b>Information Property</b>
+                <a href="/<?= $BASEAPP;?>/index.php" class="btn btn-success pull-right">Back</a>
+            </h4>
             <hr>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email"></label>
+                <img style="margin-left: 12px;" src="/<?= $BASEAPP;?>/img/<?=$get['main_image'];?>" class="img-thumbnail">
+            </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Property Title: </label>
                 <div class="col-sm-6">
                     <input type="hidden" name="id" value="<?=$get['id'];?>">
-                    <input value="<?=$get['property_title'];?>" name="property_title" type="text" class="form-control" placeholder="Enter Title" required>
+                    <input disabled value="<?=$get['property_title'];?>" name="property_title" type="text" class="form-control" placeholder="Enter Title" required>
                 </div>
             </div>
             <?php if(!isset($_GET['id'])) { ?>
@@ -64,89 +61,80 @@ require 'config/db.php';
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Rent Per Week: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['price'];?>" name="price" type="text" class="form-control" placeholder="Enter Price" required>
+                    <input disabled value="<?=$get['price'];?>" name="price" type="text" class="form-control" placeholder="Enter Price" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Size Square Foot: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['size'];?>" name="size" type="text" class="form-control" placeholder="Enter Size" required>
+                    <input disabled value="<?=$get['size'];?>" name="size" type="text" class="form-control" placeholder="Enter Size" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Address: </label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" name="address" placeholder="Enter Address" required><?=$get['address'];?></textarea>
+                    <textarea disabled class="form-control" name="address" placeholder="Enter Address" required><?=$get['address'];?></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Bedrooms: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['bedroom'];?>" name="bedroom" type="text" class="form-control" placeholder="Enter Bedrooms" required>
+                    <input disabled value="<?=$get['bedroom'];?>" name="bedroom" type="text" class="form-control" placeholder="Enter Bedrooms" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Bathrooms: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['bathroom'];?>" name="bathroom" type="text" class="form-control" placeholder="Enter Bathrooms" required>
+                    <input disabled value="<?=$get['bathroom'];?>" name="bathroom" type="text" class="form-control" placeholder="Enter Bathrooms" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Is Furnished: </label>
                 <div class="col-sm-6">
-                    <select class="form-control" name="furnished" required>
-                        <option value="">-- choose --</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
+                    <input disabled value="<?=$get['furnished'];?>" name="bathroom" type="text" class="form-control" placeholder="Enter Bathrooms" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Is Pet Firendly: </label>
                 <div class="col-sm-6">
-                    <select class="form-control" name="pet_friendly" required>
-                        <option value="">-- choose --</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
+                    <input disabled value="<?=$get['pet_friendly'];?>" name="bathroom" type="text" class="form-control" placeholder="Enter Bathrooms" required>
                 </div>
             </div>
 
             <br><br>
-            <h5><b>Information Owner</b></h5>
+            <h4><b>Information Owner</b></h4>
             <hr>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Owner Name: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['owner_name'];?>" name="owner_name" type="text" class="form-control" placeholder="Enter Owner Name" required>
+                    <input disabled value="<?=$get['owner_name'];?>" name="owner_name" type="text" class="form-control" placeholder="Enter Owner Name" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Owner Email: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['owner_email'];?>" name="owner_email" type="text" class="form-control" placeholder="Enter Owner Email" required>
+                    <input disabled value="<?=$get['owner_email'];?>" name="owner_email" type="text" class="form-control" placeholder="Enter Owner Email" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Owner Phone: </label>
                 <div class="col-sm-6">
-                    <input value="<?=$get['owner_phone'];?>" name="owner_phone" type="text" class="form-control" placeholder="Enter Owner Phone" required>
+                    <input disabled value="<?=$get['owner_phone'];?>" name="owner_phone" type="text" class="form-control" placeholder="Enter Owner Phone" required>
                 </div>
             </div>
 
             <br><br>
-            <h5><b>Description Property</b></h5>
+            <h4><b>Description Property</b></h4>
             <hr>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Description: </label>
                 <div class="col-sm-6">
-                    <textarea rows="6" class="form-control" name="description" placeholder="Enter Description" required><?=$get['description'];?></textarea>
+                    <textarea disabled rows="6" class="form-control" name="description" placeholder="Enter Description" required><?=$get['description'];?></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" name="submit" class="btn btn-success" >Save Property</button>
-                    <a href="/<?= $BASEAPP;?>/manproperties.php" class="btn btn-default">Back</a>
+                    <a href="/<?= $BASEAPP;?>/index.php" class="btn btn-default">Back</a>
                 </div>
             </div>
           </form>

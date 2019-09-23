@@ -12,7 +12,7 @@ if($_POST) {
 	if($getNumRow != 1) {
 		$query = $db->query("INSERT INTO customer (username, email, first_name, active) VALUES ('".$email."', '".$email."', '".$name."', '1')");
 		$_SESSION['level'] = 'customer';
-		$_SESSION['userId'] = $query->insert_id;
+		$_SESSION['userId'] = $db->insert_id;
 		echo json_encode(array('status'=>200, 'message'=>'success', 'data'=>$query->insert_id));
 	} else {
 		$_SESSION['level'] = 'customer';

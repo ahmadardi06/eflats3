@@ -1,5 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header('location: /eflats3/index.php');
+require 'config/db.php';
+header('location: /'.$BASEAPP.'/index.php');
 ?>

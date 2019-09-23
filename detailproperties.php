@@ -10,7 +10,7 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
     <title>Detail Properties</title>
 
@@ -27,8 +27,8 @@ require 'config/db.php';
     		<div class="col-sm-12">
 			<h4>
               Detail Properties &nbsp;
-              <a href="/eflats3/myproperties.php" class="btn btn-success">Back</a>
-              <a href="/eflats3/manproperties.php" class="btn btn-primary pull-right">Manage Properties</a>
+              <a href="/<?= $BASEAPP;?>/myproperties.php" class="btn btn-success">Back</a>
+              <a href="/<?= $BASEAPP;?>/manproperties.php" class="btn btn-primary pull-right">Manage Properties</a>
             </h4>
           <hr>
         </div>
@@ -43,10 +43,10 @@ require 'config/db.php';
                 $get = array('id'=>'','property_title'=>'','price'=>'','size'=>'','address'=>'','bedroom'=>'','bathroom'=>'','furnished'=>'','pet_friendly'=>'','owner_name'=>'','owner_email'=>'','owner_phone'=>'','description'=>'');
             }
             ?>
-          <form enctype="multipart/form-data" class="form-horizontal" action="/eflats3/config/processproperties.php" method="post">
+          <form enctype="multipart/form-data" class="form-horizontal" action="/<?= $BASEAPP;?>/config/processproperties.php" method="post">
             <h5><b>Information Property</b></h5>
             <hr>
-            <img src="/eflats3/img/<?=$get['main_image'];?>" class="img-thumbnail">
+            <img src="/<?= $BASEAPP;?>/img/<?=$get['main_image'];?>" class="img-thumbnail">
             <br><br>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Property Title: </label>
@@ -139,8 +139,8 @@ require 'config/db.php';
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a href="/eflats3/addproperties.php?id=<?=$get['id'];?>" class="btn btn-success">Update Properties</a>
-                    <a href="/eflats3/manproperties.php" class="btn btn-default">Back</a>
+                    <a href="/<?= $BASEAPP;?>/addproperties.php?id=<?=$get['id'];?>" class="btn btn-success">Update Properties</a>
+                    <a href="/<?= $BASEAPP;?>/manproperties.php" class="btn btn-default">Back</a>
                 </div>
             </div>
           </form>

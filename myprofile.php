@@ -10,7 +10,7 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
     <title>My Profile</title>
 
@@ -36,7 +36,7 @@ require 'config/db.php';
                 }
                 $get = $db->query("SELECT * FROM ".$table." WHERE ".$fieldId." = '".$_SESSION['userId']."'")->fetch_assoc();
                 ?>
-                <form class="form-horizontal" method="post" action="/eflats3/config/updateprofile.php">
+                <form class="form-horizontal" method="post" action="/<?= $BASEAPP;?>/config/updateprofile.php">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">Username: </label>
                         <div class="col-sm-6">
@@ -93,17 +93,23 @@ require 'config/db.php';
                 <br>
                 <h4>Update Password</h4>
                 <hr>
-                <form class="form-horizontal" method="post" action="/eflats3/config/updatepassword.php">
+                <form class="form-horizontal" method="post" action="/<?= $BASEAPP;?>/config/updatepassword.php">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">New Password: </label>
+                        <label class="control-label col-sm-2" for="email">Current Password: </label>
                         <div class="col-sm-6">
                             <input type="hidden" name="id" value="<?= $get[$fieldId];?>" />
                             <input type="hidden" name="level" value="<?= $_SESSION['level'];?>" />
+                            <input id="currentPassword" required value="" name="currentpassword" type="password" class="form-control" placeholder="Enter Current Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">New Password: </label>
+                        <div class="col-sm-6">
                             <input id="updatePassword" required value="" name="password" type="password" class="form-control" placeholder="Enter New Password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">First Name: </label>
+                        <label class="control-label col-sm-2" for="email">Confirm Password: </label>
                         <div class="col-sm-6">
                             <input id="updateConfirmPassword" required value="" name="confirmpassword" type="password" class="form-control" placeholder="Enter Confirm Password">
                         </div>

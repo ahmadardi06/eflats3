@@ -10,7 +10,7 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
     <title>All Properties</title>
 
@@ -27,8 +27,8 @@ require 'config/db.php';
     		<div class="col-sm-12">
     			<h4>
               All Properties &nbsp;
-              <a href="/eflats3/addproperties.php" class="btn btn-success">Add</a>
-              <a href="/eflats3/myproperties.php" class="btn btn-primary pull-right">My Properties</a>
+              <a href="/<?= $BASEAPP;?>/addproperties.php" class="btn btn-success">Add</a>
+              <a href="/<?= $BASEAPP;?>/myproperties.php" class="btn btn-primary pull-right">My Properties</a>
           </h4>
           <hr>
         </div>
@@ -70,9 +70,9 @@ require 'config/db.php';
                 <td><?= $rows['owner_email'];?></td>
                 <td><?= ($rows['status'] == '2') ? 'Publish' : 'Draft';?></td>
                 <td>
-                  <a href="/eflats3/detailproperties.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-info">more</a> 
-                  <a href="/eflats3/addproperties.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-primary">edit</a>
-                  <a href="/eflats3/config/processproperties.php?action=delete&id=<?=$rows['id'];?>" class="btn btn-sm btn-danger">delete</a>
+                  <a href="/<?= $BASEAPP;?>/detailproperties.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-info">more</a> 
+                  <a href="/<?= $BASEAPP;?>/addproperties.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-primary">edit</a>
+                  <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=delete&id=<?=$rows['id'];?>" class="btn btn-sm btn-danger">delete</a>
                 </td>
               </tr>
             <?php } ?>

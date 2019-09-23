@@ -10,7 +10,7 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
     <title>My Properties</title>
 
@@ -27,7 +27,7 @@ require 'config/db.php';
     		<div class="col-sm-12">
     			<h4>
             My Properties
-            <a href="/eflats3/manproperties.php" class="btn btn-primary pull-right">Manage</a>
+            <a href="/<?= $BASEAPP;?>/manproperties.php" class="btn btn-primary pull-right">Manage</a>
         </h4>
         <hr>
             </div>
@@ -39,7 +39,7 @@ require 'config/db.php';
         while($rows = $query->fetch_assoc()) { ?>
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
-              <img src="/eflats3/img/<?= $rows['main_image'];?>" alt="Title">
+              <img src="/<?= $BASEAPP;?>/img/<?= $rows['main_image'];?>" alt="Title">
               <div class="caption">
                 <h3><?= $rows['property_title'];?></h3>
                 <p>
@@ -48,11 +48,11 @@ require 'config/db.php';
                   <b>Phone : </b> <?= $rows['owner_phone'];?><br>
                 </p>
                 <p>
-                  <a href="/eflats3/detailproperties.php?id=<?=$rows['id'];?>" class="btn btn-primary" role="button">More</a> 
+                  <a href="/<?= $BASEAPP;?>/detailproperties.php?id=<?=$rows['id'];?>" class="btn btn-primary" role="button">More</a> 
                   <?php if($rows['status'] == '0') { ?>
-                    <a href="/eflats3/config/processproperties.php?action=publish&id=<?=$rows['id'];?>" class="btn btn-default" role="button">Publish</a>
+                    <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=publish&id=<?=$rows['id'];?>" class="btn btn-default" role="button">Publish</a>
                   <?php } else { ?>
-                    <a href="/eflats3/config/processproperties.php?action=unpublish&id=<?=$rows['id'];?>"" class="btn btn-default" role="button">Unpublish</a>
+                    <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=unpublish&id=<?=$rows['id'];?>"" class="btn btn-default" role="button">Unpublish</a>
                   <?php } ?>
                 </p>
               </div>

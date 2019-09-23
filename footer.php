@@ -7,6 +7,22 @@
   </div>
 </footer>
 
+<div id="myFirstLogin" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <b>Attention</b>
+      </div>
+      <div class="modal-body">
+        <p>You must be login first.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="myCustomerLogin" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -14,7 +30,7 @@
         <b>Login account customer</b>
       </div>
       <div class="modal-body">
-        <form class="form-vertical" action="/eflats3/config/logincustomer.php" method="post">
+        <form class="form-vertical" action="/<?= $BASEAPP;?>/config/logincustomer.php" method="post">
           <div class="form-group">
             <label>Username</label>
             <input class="form-control" type="text" name="username" value="" placeholder="username" required />
@@ -24,10 +40,11 @@
             <input class="form-control" type="password" name="password" value="" placeholder="password" required />
           </div>
           <div class="form-group">
-            <input class="btn btn-block btn-success" type="submit" name="submit" value="LOGIN" />
+            <input class="btn btn-success" type="submit" name="submit" value="LOGIN" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
           <div class="form-group">
-            <a href="/eflats3/forgotpassword.php" style="text-decoration: none;">Forgot password?</a>
+            <a href="/<?= $BASEAPP;?>/forgotpassword.php" style="text-decoration: none;">Forgot password?</a>
           </div>
 
           <fb:login-button 
@@ -48,7 +65,7 @@
         <b>Login account admin</b>
       </div>
       <div class="modal-body">
-        <form class="form-vertical" action="/eflats3/config/loginadmin.php" method="post">
+        <form class="form-vertical" action="/<?= $BASEAPP;?>/config/loginadmin.php" method="post">
           <div class="form-group">
             <label>Username</label>
             <input class="form-control" type="text" name="username" value="" placeholder="username" required />
@@ -58,10 +75,11 @@
             <input class="form-control" type="password" name="password" value="" placeholder="password" required />
           </div>
           <div class="form-group">
-            <input class="btn btn-block btn-success" type="submit" name="submit" value="LOGIN" />
+            <input class="btn btn-success" type="submit" name="submit" value="LOGIN" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
           <div class="form-group">
-            <a href="/eflats3/forgotpassword.php" style="text-decoration: none;">Forgot password?</a>
+            <a href="/<?= $BASEAPP;?>/forgotpassword.php" style="text-decoration: none;">Forgot password?</a>
           </div>
         </form>
       </div>
@@ -76,7 +94,7 @@
         <b>Please fill below</b>
       </div>
       <div class="modal-body">
-        <form class="form-vertical" action="/eflats3/config/registration.php" method="post">
+        <form class="form-vertical" action="/<?= $BASEAPP;?>/config/registration.php" method="post">
           <div class="form-group">
             <label>Email</label>
             <input class="form-control" type="text" name="email" value="" placeholder="email" required />
@@ -89,10 +107,10 @@
             <label>Last Name</label>
             <input class="form-control" type="text" name="lastname" value="" placeholder="lastname" required />
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Extension</label>
             <input class="form-control" type="text" name="extension" value="" placeholder="extension" required />
-          </div>
+          </div> -->
           <div class="form-group">
             <label>Username</label>
             <input class="form-control" type="text" name="username" value="" placeholder="username" required />
@@ -105,8 +123,9 @@
             <label>Confirm Password</label>
             <input id="regConfirmPassword" class="form-control" type="password" name="confirmPassword" value="" placeholder="confirm password" required />
           </div>
-          <div id="btnRegister" class="form-group">
-            <input class="btn btn-block btn-success" type="submit" name="submit" value="REGISTER" />
+          <div class="form-group">
+            <input id="btnRegister" class="btn btn-success" type="submit" name="submit" value="REGISTER" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </form>
       </div>
@@ -127,7 +146,8 @@
             <input class="form-control" type="text" name="email" value="" placeholder="email" required />
           </div>
           <div class="form-group">
-            <input class="btn btn-block btn-success" type="submit" name="submit" value="SEND" />
+            <input class="btn btn-success" type="submit" name="submit" value="SEND" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </form>
       </div>
@@ -146,12 +166,15 @@
   $(function(){
     $('#btnRegister').hide();
     $('#btnUpdateRegister').hide();
+    
+    $('#updatePassword').attr('disabled', true);
+    $('#updateConfirmPassword').attr('disabled', true);
 
     $('#txtSearching').on('keydown', function(e) {
       if(e.key == 'Enter') {
         var keyword = $(this).val();
         $.ajax({
-          url: baseUrlOrigin+'/eflats3/api/indexsearch.php',
+          url: baseUrlOrigin+'/<?= $BASEAPP;?>/api/indexsearch.php',
           type: 'POST',
           data: 'keyword='+keyword,
           success: function(result) {
@@ -161,7 +184,7 @@
               html += '<div class="row">';
                 html +='<div class="col-sm-6 col-md-3">';
                     html +='<div class="thumbnail">';
-                      html +='<img src="/eflats3/img/'+element.main_image+'" alt="Title">';
+                      html +='<img src="/<?= $BASEAPP;?>/img/'+element.main_image+'" alt="Title">';
                       html +='<div class="caption">';
                         html +='<h3>'+element.property_title+'</h3>';
                         html +='<p>';
@@ -171,7 +194,7 @@
                         html +='</p>';
                         html +='<p>';
                           html +='<a href="#" class="btn btn-primary" role="button">More</a>&nbsp;';
-                            html +='<a href="/eflats3/config/addfavorite.php?item='+element.id+'" class="btn btn-default" role="button">Favorite</a>';
+                            html +='<a href="/<?= $BASEAPP;?>/config/addfavorite.php?item='+element.id+'" class="btn btn-default" role="button">Favorite</a>';
                         html +='</p>';
                       html +='</div>';
                     html +='</div>';
@@ -191,6 +214,25 @@
         $('#btnRegister').hide();
       }
     })
+
+    $('#currentPassword').on('keyup', function() {
+      var curr = $(this).val();
+      $.ajax({
+        url: baseUrlOrigin+'/<?= $BASEAPP;?>/api/checkpass.php',
+        type: 'POST',
+        data: 'pass='+curr,
+        success: function(result) {
+          if(result) {
+            $('#updatePassword').removeAttr('disabled');
+            $('#updateConfirmPassword').removeAttr('disabled');
+          } else {
+            $('#updatePassword').attr('disabled', true);
+            $('#updateConfirmPassword').attr('disabled', true);
+          }
+        }
+      })
+    })
+
     $('#updateConfirmPassword').on('keyup', function(){
       var pass = $('#updatePassword').val();
       if(pass == $(this).val()){
@@ -205,7 +247,7 @@
       var konfirm = confirm('Are you sure to deactive this account?');
       if(konfirm) {
         alert('Account has been deactive.');
-        location.href = '/eflats3/config/deactive.php?action=yes';
+        location.href = '/<?= $BASEAPP;?>/config/deactive.php?action=yes';
       } else {
         alert('Action Canceled.');
       }
@@ -238,15 +280,18 @@
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       FB.api('/me', {fields: 'name,email' }, function(response) {
-        $.ajax({
-          url: baseUrl+'/eflats3/api/login.php',
-          data: 'name='+response.name+'&email='+response.email,
-          type: 'POST',
-          success: function(res) {
-            // console.log(res)
-            window.location.reload();
-          }
-        })
+        if(response.hasOwnProperty('email') && response.hasOwnProperty('name')) {
+          $.ajax({
+            url: baseUrl+'/<?= $BASEAPP;?>/api/login.php',
+            data: 'name='+response.name+'&email='+response.email,
+            type: 'POST',
+            success: function(res) {
+              window.location.reload();
+            }
+          })
+        } else {
+          console.log('ERROR: ', response);          
+        }
       });
     });
   }

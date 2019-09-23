@@ -10,7 +10,7 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
     <title>All Customers</title>
 
@@ -59,11 +59,11 @@ require 'config/db.php';
                 <td><?= ($rows['active'] == '1') ? 'Active' : 'Deactive';?></td>
                 <td>
                   <?php if($rows['active'] == '1') { ?>
-                    <a href="/eflats3/config/processproperties.php?action=deactive&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-info">deactive</a>
+                    <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=deactive&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-info">deactive</a>
                   <?php } else { ?>
-                    <a href="/eflats3/config/processproperties.php?action=active&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-info">active</a> 
+                    <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=active&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-info">active</a> 
                   <?php } ?>
-                  <a href="/eflats3/config/processproperties.php?action=deleteuser&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-danger">delete</a>
+                  <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=deleteuser&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-danger">delete</a>
                 </td>
               </tr>
             <?php } ?>

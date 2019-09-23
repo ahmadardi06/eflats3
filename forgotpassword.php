@@ -14,9 +14,9 @@ require 'vendor/autoload.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
-    <title>EFlats v.3</title>
+    <title>EFlats</title>
 
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -31,7 +31,7 @@ require 'vendor/autoload.php';
         <div class="row">
             <h2 class="text-center">Forgot Your Password</h2>
             <br>
-            <form action="/eflats3/forgotpassword.php" method="post">
+            <form action="/<?= $BASEAPP;?>/forgotpassword.php" method="post">
                 <div class="col-lg-4 col-lg-offset-4">
                     <div class="input-group">
                         <input type="email" name="email" placeholder="Enter email" class="form-control" /> 
@@ -62,7 +62,7 @@ require 'vendor/autoload.php';
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Link Update Password';
-                    $mail->Body    = 'http://localhost/eflats3/api/api.php?action=updatepassword&email='.$_POST['email'];
+                    $mail->Body    = 'http://localhost/'.$BASEAPP.'/api/api.php?action=updatepassword&email='.$_POST['email'];
 
                     $mail->send();
 
@@ -70,7 +70,7 @@ require 'vendor/autoload.php';
                         <p style="margin-top: 75px;" class="text-center">
                             Link has been sent. Check your email.
                             <br>
-                            <a href="/eflats3/index.php">Go to Dashboard</a>
+                            <a href="/'.$BASEAPP.'/index.php">Go to Dashboard</a>
                         </p>
                     ';
                 } catch (Exception $e) {

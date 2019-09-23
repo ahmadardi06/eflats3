@@ -10,9 +10,9 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
-    <title>EFlats v.3</title>
+    <title>EFlats</title>
 
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -27,7 +27,7 @@ require 'config/db.php';
         <div class="row">
             <h2 class="text-center">Set Your Password</h2>
             <br>
-            <form action="/eflats3/formforgot.php" method="post">
+            <form action="/<?= $BASEAPP;?>/formforgot.php" method="post">
                 <div class="col-lg-4 col-lg-offset-4">
                     <div class="input-group">
                         <input type="hidden" name="email" value="<?= $_GET['email'];?>">
@@ -47,7 +47,7 @@ require 'config/db.php';
                         <p style="margin-top: 75px;" class="text-center">
                             New password has been set. Now you can login with new password.
                             <br>
-                            <a href="/eflats3/index.php">Go to Dashboard</a>
+                            <a href="/'.$BASEAPP.'/index.php">Go to Dashboard</a>
                         </p>
                     ';
                 ?>

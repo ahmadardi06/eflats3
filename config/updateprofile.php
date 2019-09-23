@@ -19,7 +19,7 @@ if(isset($_POST['submit'])) {
 
 	$query = $db->query("UPDATE ".$table." SET username = '".$username."', first_name = '".$firstname."', last_name = '".$lastname."', extension = '".$extension."', email = '".$email."', address = '".$address."', phonenumber = '".$phonenumber."' WHERE ".$fieldId." = '".$_POST['id']."'");
 	$db->query("INSERT INTO logs VALUES(null, '".date('Y-m-d H:i:s')."', '".$_SERVER['REMOTE_ADDR']."', 'User ".$table." ID ".$_POST['id']." Updated')");
-	header('location: /eflats3/myprofile.php?message=update_user_success');
+	header('location: /'.$BASEAPP.'/myprofile.php?message=update_user_success');
 } else {
 	$msg = array('status'=>200, 'message'=>'Not allowed to get this page.');
 	echo json_encode($msg);

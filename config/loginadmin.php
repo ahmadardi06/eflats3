@@ -15,9 +15,9 @@ if(isset($_POST['submit'])) {
 
 		$_SESSION['level'] = 'admin';
 		$_SESSION['userId'] = $getFetchRow['admin_id'];
-		header('location: /eflats3/index.php');
+		header('location: /'.$BASEAPP.'/index.php');
 	} else {
-		header('location: /eflats3/index.php?message=Username or password not found.');
+		header('location: /'.$BASEAPP.'/index.php?message=Username or password not found.');
 	}
 } else {
 	$msg = array('status'=>200, 'message'=>'Not allowed to get this page.');

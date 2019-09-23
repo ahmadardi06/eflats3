@@ -7,9 +7,9 @@ if(isset($_GET['item'])) {
 	if($cekRow != 1) {
 		$query = $db->query("INSERT INTO favorites VALUES (null, '".$_SESSION['userId']."', '".$_GET['item']."', '".date('Y-m-d H:i:s')."')");
 		$db->query("INSERT INTO logs VALUES(null, '".date('Y-m-d H:i:s')."', '".$_SERVER['REMOTE_ADDR']."', 'User Customer ".$_SESSION['userId']." Add Favorite ".$_GET['item']."')");
-		header('location: /eflats3/index.php?message=add_favorite_success');
+		header('location: /'.$BASEAPP.'/index.php?message=add_favorite_success');
 	} else {
-		header('location: /eflats3/index.php?message=already_favorite_success');
+		header('location: /'.$BASEAPP.'/index.php?message=already_favorite_success');
 	}
 } else {
 	$msg = array('status'=>200, 'message'=>'Not allowed to get this page.');

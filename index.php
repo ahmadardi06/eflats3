@@ -11,9 +11,9 @@ require 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="dist/favicon.ico">
+    <link rel="icon" href="img/home.jpg">
 
-    <title>EFlats v.3</title>
+    <title>EFlats</title>
 
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -25,13 +25,7 @@ require 'config/db.php';
     <?php include 'navigation.php'; ?>
 
     <div class="container">
-      <?php if(isset($_GET['message'])) { ?>
-        <div class="alert alert-info">
-          <b>Warning!</b>
-          <p><?php echo $_GET['message'];?></p>
-        </div>
-      <?php } ?>
-      
+
       <div id="resultSearch">
         <div class="jumbotron">
           <h1>Flash Sales</h1>
@@ -51,7 +45,7 @@ require 'config/db.php';
         while($rows = $query->fetch_assoc()) { ?>
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
-              <img src="/eflats3/img/<?= $rows['main_image'];?>" alt="Title">
+              <img src="/<?= $BASEAPP;?>/img/<?= $rows['main_image'];?>" alt="Title">
               <div class="caption">
                 <h3><?= $rows['property_title'];?></h3>
                 <p>
@@ -60,11 +54,11 @@ require 'config/db.php';
                   <b>Phone : </b> <?= $rows['owner_phone'];?><br>
                 </p>
                 <p>
-                  <a href="#" class="btn btn-primary" role="button">More</a> 
+                  <a href="/<?= $BASEAPP;?>/moreproperties.php?id=<?= $rows['id'];?>" class="btn btn-primary" role="button">More</a> 
                   <?php if(isset($_SESSION['userId'])) { ?>
-                    <a href="/eflats3/config/addfavorite.php?item=<?= $rows['id'];?>" class="btn btn-default" role="button">Favorite</a>
+                    <a href="/<?= $BASEAPP;?>/config/addfavorite.php?item=<?= $rows['id'];?>" class="btn btn-default" role="button">Favorite</a>
                   <?php } else { ?>
-                    <a href="javascript:;" onclick="javascript: alert('You must be login first.');" class="btn btn-default" role="button">Favorite</a>
+                    <a href="#" data-toggle="modal" data-target="#myFirstLogin" class="btn btn-default" role="button">Favorite</a>
                   <?php } ?>
                 </p>
               </div>
