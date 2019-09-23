@@ -39,10 +39,36 @@ require 'config/db.php';
                 <a href="/<?= $BASEAPP;?>/index.php" class="btn btn-success pull-right">Back</a>
             </h4>
             <hr>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="email"></label>
-                <img style="margin-left: 12px;" src="/<?= $BASEAPP;?>/img/<?=$get['main_image'];?>" class="img-thumbnail">
+
+            <?php $expPhoto = explode(',', $get['main_image']); ;?>
+            <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <?php for ($i=0; $i < count($expPhoto); $i++) { ?> 
+                <li data-target="#carousel-generic" data-slide-to="<?=$i;?>" class="<?= ($i == 0) ? 'active':'';?>"></li>
+                <?php } ?>
+              </ol>
+              
+              <div class="carousel-inner" role="listbox">
+                <?php for ($i=0; $i < count($expPhoto); $i++) { ?> 
+                  <div class="item <?= ($i == 0) ? 'active':'';?>">
+                    <img src="/<?= $BASEAPP;?>/img/<?=$expPhoto[$i];?>" class="img-thumbnail">
+                  </div>
+                <?php } ?>
+              </div>
+
+              <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
+
+            <br>
+            <br>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Property Title: </label>
                 <div class="col-sm-6">

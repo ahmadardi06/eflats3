@@ -46,7 +46,33 @@ require 'config/db.php';
           <form enctype="multipart/form-data" class="form-horizontal" action="/<?= $BASEAPP;?>/config/processproperties.php" method="post">
             <h5><b>Information Property</b></h5>
             <hr>
-            <img src="/<?= $BASEAPP;?>/img/<?=$get['main_image'];?>" class="img-thumbnail">
+
+            <?php $expPhoto = explode(',', $get['main_image']); ;?>
+            <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <?php for ($i=0; $i < count($expPhoto); $i++) { ?> 
+                <li data-target="#carousel-generic" data-slide-to="<?=$i;?>" class="<?= ($i == 0) ? 'active':'';?>"></li>
+                <?php } ?>
+              </ol>
+              
+              <div class="carousel-inner" role="listbox">
+                <?php for ($i=0; $i < count($expPhoto); $i++) { ?> 
+                  <div class="item <?= ($i == 0) ? 'active':'';?>">
+                    <img src="/<?= $BASEAPP;?>/img/<?=$expPhoto[$i];?>" class="img-thumbnail">
+                  </div>
+                <?php } ?>
+              </div>
+
+              <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
             <br><br>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Property Title: </label>

@@ -47,7 +47,7 @@ require 'config/db.php';
                   <b>Phone : </b> <?= $rows['owner_phone'];?><br>
                 </p>
                 <p>
-                  <a href="#" class="btn btn-primary" role="button">More</a> 
+                  <a href="/<?= $BASEAPP;?>/moreproperties.php?id=<?= $rows['id'];?>" class="btn btn-primary" role="button">More</a> 
                   <a href="/<?= $BASEAPP;?>/config/removefavorite.php?item=<?=$rows['property_id'];?>" class="btn btn-danger" role="button">Remove</a>
                 </p>
               </div>

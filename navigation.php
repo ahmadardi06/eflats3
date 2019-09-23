@@ -12,12 +12,13 @@
       </a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
-      <div class="navbar-form navbar-left" role="search">
+      <form action="/<?= $BASEAPP;?>/search.php" method="get" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input id="txtSearching" type="text" class="form-control" placeholder="Search">
+          <!-- <input id="txtSearching" type="text" name="keyword" class="form-control" placeholder="Search"> -->
+          <input type="text" name="keywords" class="form-control" placeholder="keywords">
         </div>
-        <button id="btnSearching" type="button" class="btn btn-default">Search</button>
-      </div>
+        <input type="submit" name="submit" class="btn btn-default" value="search" />
+      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/<?= $BASEAPP;?>/index.php">Dashboard</a></li>
         <?php if(!isset($_SESSION['level'])) { ?>

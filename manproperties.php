@@ -62,8 +62,9 @@ require 'config/db.php';
                 <td><?= $rows['owner_email'];?></td>
                 <td><?= ($rows['status'] == '2') ? 'Publish' : 'Draft';?></td>
                 <td>
-                  <a href="/<?= $BASEAPP;?>/addproperties.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-primary">edit</a>
-                  <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=delete&id=<?=$rows['id'];?>" class="btn btn-sm btn-danger">delete</a>
+                  <a href="/<?= $BASEAPP;?>/changecover.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-info" title="Change Cover Images">cover</a> 
+                  <a href="/<?= $BASEAPP;?>/addproperties.php?id=<?=$rows['id'];?>" class="btn btn-sm btn-primary" title="Change Informations">edit</a>
+                  <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=delete&id=<?=$rows['id'];?>" class="btn btn-sm btn-danger" title="Delete Property">delete</a>
                 </td>
               </tr>
             <?php } ?>

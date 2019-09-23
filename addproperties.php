@@ -57,7 +57,7 @@ require 'config/db.php';
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Property Main Photo: </label>
                 <div class="col-sm-6">
-                    <input name="main_image" type="file" class="form-control" required>
+                    <input name="main_image[]" type="file" class="form-control" required multiple>
                 </div>
             </div>
             <?php } ?>

@@ -193,7 +193,7 @@
                           html +='<b>Phone : </b> '+element.owner_phone+'<br>';
                         html +='</p>';
                         html +='<p>';
-                          html +='<a href="#" class="btn btn-primary" role="button">More</a>&nbsp;';
+                          html +='<a href="/<?= $BASEAPP;?>/moreproperties.php?id='+element.id+'" class="btn btn-primary" role="button">More</a>&nbsp;';
                             html +='<a href="/<?= $BASEAPP;?>/config/addfavorite.php?item='+element.id+'" class="btn btn-default" role="button">Favorite</a>';
                         html +='</p>';
                       html +='</div>';

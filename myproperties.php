@@ -36,10 +36,12 @@ require 'config/db.php';
         <?php
         $query = $db->query("SELECT * FROM properties WHERE author_id = '".$_SESSION['userId']."' ORDER BY id DESC");
         $getNumRows = $query->num_rows;
-        while($rows = $query->fetch_assoc()) { ?>
+        while($rows = $query->fetch_assoc()) { 
+          $expImage = explode(',', $rows['main_image']);
+          ?>
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
-              <img src="/<?= $BASEAPP;?>/img/<?= $rows['main_image'];?>" alt="Title">
+              <img src="/<?= $BASEAPP;?>/img/<?= $expImage[0];?>" alt="Title">
               <div class="caption">
                 <h3><?= $rows['property_title'];?></h3>
                 <p>

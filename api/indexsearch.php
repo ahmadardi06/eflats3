@@ -1,6 +1,7 @@
 <?php
 require __DIR__."/../vendor/autoload.php";
 
+use ElasticSearchClient\ElasticSearchClient;
 use SearchElastic\Search;
 
 if(isset($_POST['keyword'])) {

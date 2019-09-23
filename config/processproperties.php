@@ -23,12 +23,20 @@ if(isset($_POST['submit'])) {
 	$description = $_POST['description'];
 
 	if ($_POST['id'] == '') {
-		$replaceSpacePhoto = str_replace(' ', '-', $_FILES['main_image']['name']);
-		$namePhoto = date('YmdHis').'-'.$replaceSpacePhoto;
-		$mainPhoto = $_FILES['main_image']['tmp_name'];
-		move_uploaded_file($mainPhoto, '../img/'.$namePhoto);
 
-		$query = $db->query("INSERT INTO properties VALUES (null, '".$title."', '".$namePhoto."', '".$address."', '".$description."', '".$price."', '".$size."', '".$ownerName."', '".$ownerPhone."', '".$ownerEmail."', '".$bedroom."', '".$bathroom."', '".$furnished."', '".$petFriendly."', '".$_SESSION['userId']."', '".$table."', '0')");
+		$countFiles = $_FILES['main_image']['name'];
+		$namaFile = "";
+		for ($i=0; $i < count($countFiles); $i++) { 
+			$replaceCommaPhoto = str_replace(',', '-', $countFiles[$i]);
+			$replaceSpacePhoto = str_replace(' ', '-', $replaceCommaPhoto);
+			$namePhoto = date('YmdHis').'-'.$replaceSpacePhoto;
+			$mainPhoto = $_FILES['main_image']['tmp_name'][$i];
+			move_uploaded_file($mainPhoto, '../img/'.$namePhoto);
+			$namaFile .= $namePhoto.',';
+		}
+		$removeLastCharacter = substr_replace($namaFile ,"", -1);
+
+		$query = $db->query("INSERT INTO properties VALUES (null, '".$title."', '".$removeLastCharacter."', '".$address."', '".$description."', '".$price."', '".$size."', '".$ownerName."', '".$ownerPhone."', '".$ownerEmail."', '".$bedroom."', '".$bathroom."', '".$furnished."', '".$petFriendly."', '".$_SESSION['userId']."', '".$table."', '0')");
 		$db->query("INSERT INTO logs VALUES(null, '".date('Y-m-d H:i:s')."', '".$_SERVER['REMOTE_ADDR']."', 'User ".$table." ID ".$_SESSION['userId']." Create New Property')");
 		header('location: /'.$BASEAPP.'/manproperties.php?message=add_new_properties');
 	} else {
@@ -41,7 +49,10 @@ if(isset($_POST['submit'])) {
 	if(isset($_GET['action'])) {
 		if($_GET['action'] == 'delete') {
 			$getData = $db->query("SELECT main_image FROM properties WHERE id = '".$_GET['id']."'")->fetch_assoc();
-			unlink('../img/'.$getData['main_image']);
+			$expImage = explode(',', $getData['main_image']);
+			for ($i=0; $i < count($expImage); $i++) { 
+				unlink('../img/'.$expImage[$i]);
+			}
 			$query = $db->query("DELETE FROM properties WHERE id = '".$_GET['id']."'");
 			header('location: /'.$BASEAPP.'/manproperties.php?message=delete_properties');
 		} else if($_GET['action'] == 'publish') {
