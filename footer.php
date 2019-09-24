@@ -213,6 +213,57 @@
       }
     });
 
+    $('#btnApply').on('click', function() {
+      var statusLogin = $('#statusLogin').val();
+      var keywords = $('#txt_keywords').val();
+      var price = $('#txt_price').val();
+      var bedroom = $('#txt_bedroom').val();
+      var bathroom = $('#txt_bathroom').val();
+      var furnished = $('input[name=furnished]:checked').val();
+      var petFriendly = $('input[name=pet_friendly]:checked').val();
+
+      var formData = {
+        keywords: keywords, price: price, bedroom: bedroom, bathroom: bathroom, furnished: furnished, petFriendly: petFriendly
+      };
+
+      $.ajax({
+        url: baseUrlOrigin+'/<?= $BASEAPP;?>/api/indexmulti.php',
+        type: 'GET',
+        data: formData,
+        success: function(result) {
+          var jsonParse = JSON.parse(result);
+          var html = "";
+          for (var i = 0; i < jsonParse.hits.total; i++) {
+            var element = jsonParse.hits.hits[i]._source;
+            var expImg = element.main_image.split(',');
+            html +='<div class="col-sm-6 col-md-3">';
+              html +='<div class="thumbnail">';
+                html +='<img src="/<?= $BASEAPP;?>/img/'+expImg[0]+'" alt="Title">';
+                html +='<div class="caption">';
+                  html +='<h3>'+element.property_title+'</h3>';
+                  html +='<p>';
+                    html +='<b>Price : </b> '+element.price+'<br>';
+                    html +='<b>Size : </b> '+element.size+'<br>';
+                    html +='<b>Phone : </b> '+element.owner_phone+'<br>';
+                  html +='</p>';
+                  html +='<p>';
+                    html +='<a href="/<?= $BASEAPP;?>/moreproperties.php?id='+element.id+'" class="btn btn-primary" role="button">More</a>&nbsp;';
+                    if(statusLogin == 'true') {
+                      html +='<a href="/<?= $BASEAPP;?>/config/addfavorite.php?item='+element.id+'" class="btn btn-default" role="button">Favorite</a>';
+                    } else {
+                      html +='<a href="#" data-toggle="modal" data-target="#myFirstLogin" class="btn btn-default" role="button">Favorite</a>';
+                    }
+                  html +='</p>';
+                html +='</div>';
+              html +='</div>';
+            html +='</div>';
+          }
+          $('#searchResult').html(html);
+          $('#searchResultCount').html('Result '+jsonParse.hits.total);
+        }
+      })
+    })
+
     $('#regConfirmPassword').on('keyup', function(){
       var pass = $('#regPassword').val();
       if(pass == $(this).val()){

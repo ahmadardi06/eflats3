@@ -15,6 +15,4 @@ $sync->setSqlQuery("SELECT * FROM properties");
 //Now you don't need to pass the tablename'
 $result = $sync->insertAllData($connection);
 
-echo '<pre>';
-print_r($result);
-echo '</pre>';
+// echo json_encode($result);

@@ -1,6 +1,15 @@
 <?php
 session_start();
 require 'config/db.php';
+require __DIR__."/vendor/autoload.php";
+
+use Elasticsearch\ClientBuilder;
+
+$hosts = [
+  'http://elk.carsworld.co.id:9200'
+];
+
+$client = ClientBuilder::create()->setHosts($hosts)->build();
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,30 +45,31 @@ require 'config/db.php';
           <h3><b>Filter</b></h3>
           <div class="panel panel-default">
             <div class="panel-body">
-              <form action="/<?= $BASEAPP;?>/search.php" method="GET">
-                <input type="hidden" name="keywords" value="<?= $_GET['keywords'];?>">
+              <div>
+                <input type="hidden" id="txt_keywords" name="keywords" value="<?= $_GET['keywords'];?>">
+                <input type="hidden" id="statusLogin" name="statusLogin" value="<?= isset($_SESSION['level']) ? 'true': 'false';?>">
                 <div class="form-group">
-                  <label for="formControlRange">Range Price</label>
-                  <input type="range" name="price" min="0" max="1000" class="form-control-range">
+                  <label for="formControlRange">Price</label>
+                  <input id="txt_price" type="number" value="0" name="price" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="formControlRange">Bedroom</label>
-                  <input type="number" name="bedroom" class="form-control" value="0">
+                  <input id="txt_bedroom" type="number" name="bedroom" class="form-control" value="0">
                 </div>
                 <div class="form-group">
                   <label for="formControlRange">Bathroom</label>
-                  <input type="number" name="bathroom" class="form-control" value="0">
+                  <input id="txt_bathroom" type="number" name="bathroom" class="form-control" value="0">
                 </div>
                 <div class="form-group">
                   <label for="email">Furnished</label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="furnished" id="furnished" value="Yes" >
+                    <input id="txt_furnished" class=" form-check-input" type="radio" name="furnished"  value="Yes" checked>
                     <label class="form-check-label" for="furnished">
                       Yes
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="furnished" id="furnished" value="No">
+                    <input id="txt_furnished" class=" form-check-input" type="radio" name="furnished" value="No">
                     <label class="form-check-label" for="furnished">
                       No
                     </label>
@@ -68,20 +78,20 @@ require 'config/db.php';
                 <div class="form-group">
                   <label for="email">Pet Friendly</label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pet_friendly" id="pet_friendly" value="Yes">
+                    <input id="txt_pet_friendly" class=" form-check-input" type="radio" name="pet_friendly" value="Yes" checked>
                     <label class="form-check-label" for="pet_friendly">
                       Yes
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pet_friendly" id="pet_friendly" value="No">
+                    <input id="txt_pet_friendly" class=" form-check-input" type="radio" name="pet_friendly" value="No">
                     <label class="form-check-label" for="pet_friendly">
                       No
                     </label>
                   </div>
                 </div>
-                <input type="submit" name="submit" value="apply" class="btn btn-primary">
-              </form>
+                <input id="btnApply" type="button" name="apply" value="apply" class="btn btn-primary">
+              </div>
             </div>
           </div>
         </div>
@@ -99,9 +109,9 @@ require 'config/db.php';
         ?>
 
         <div class="col-sm-9">
-          <h3><b>Results <?= $getNumRows;?></b></h3>
+          <h3><b id="searchResultCount">Results <?= $getNumRows;?></b></h3>
           <div class="panel panel-default">
-            <div class="panel-body">
+            <div id="searchResult" class="panel-body">
               <?php while($rows = $query->fetch_assoc()) { 
                 $expImage = explode(',', $rows['main_image']);
                 ?>
@@ -113,10 +123,6 @@ require 'config/db.php';
                       <p>
                         <b>Price : </b> <?= $rows['price'];?><br>
                         <b>Size : </b> <?= $rows['size'];?><br>
-                        <b>Bedrooms : </b> <?= $rows['bedroom'];?><br>
-                        <b>Bathrooms : </b> <?= $rows['bathroom'];?><br>
-                        <b>Furnished : </b> <?= $rows['furnished'];?><br>
-                        <b>Pet Friendly : </b> <?= $rows['pet_friendly'];?><br>
                         <b>Phone : </b> <?= $rows['owner_phone'];?><br>
                       </p>
                       <p>
@@ -131,6 +137,7 @@ require 'config/db.php';
                   </div>
                 </div>
               <?php } ?>
+
             </div>
           </div>
         </div>
