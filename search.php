@@ -1,15 +1,6 @@
 <?php
 session_start();
 require 'config/db.php';
-require __DIR__."/vendor/autoload.php";
-
-use Elasticsearch\ClientBuilder;
-
-$hosts = [
-  'http://elk.carsworld.co.id:9200'
-];
-
-$client = ClientBuilder::create()->setHosts($hosts)->build();
 ?>
 <!doctype html>
 <html lang="en">
