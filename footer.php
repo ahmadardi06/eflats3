@@ -1,12 +1,13 @@
 <footer class="footer">
   <div class="container">
     <p class="text-muted">
-      Copyright 2019. All Right Reserved. 
+      Copyright 2019. 
       <a class="pull-right" href="privacy.php">Privacy Policy</a>
     </p>
   </div>
 </footer>
 
+<!-- modal for message -->
 <div id="myFirstLogin" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -23,6 +24,7 @@
   </div>
 </div>
 
+<!-- modal for form login level customer -->
 <div id="myCustomerLogin" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,6 +60,7 @@
   </div>
 </div>
 
+<!-- modal for form login level admin -->
 <div id="myAdminLogin" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -87,6 +90,7 @@
   </div>
 </div>
 
+<!-- modal for form registration new user level customer -->
 <div id="myFormRegistration" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -133,23 +137,19 @@
   </div>
 </div>
 
-<div id="myForgotPassword" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<!-- modal for form confirmation deactive customer -->
+<div id="myModalConfirmDeactive" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <b>Enter your email</b>
+        <b>Confirmation</b>
       </div>
       <div class="modal-body">
-        <form class="form-vertical" action="" method="post">
-          <div class="form-group">
-            <label>Email</label>
-            <input class="form-control" type="text" name="email" value="" placeholder="email" required />
-          </div>
-          <div class="form-group">
-            <input class="btn btn-success" type="submit" name="submit" value="SEND" />
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </form>
+        <p id="lblConfirmDeactive"></p>
+      </div>
+      <div class="modal-footer">
+        <a id="hrefConfirmDeactive" href="#" class="btn btn-success">Yes Deactive</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -161,58 +161,31 @@
 
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script type="text/javascript">
+  // get base url from address bar
   var baseUrlOrigin = window.location.origin;
 
   $(function(){
     var urlParams = new URLSearchParams(window.location.search);
+
+    // to display a popup with query message
+    // ex index.php?message=xxxxxx
+    // xxxxxx mean is the message
     if(urlParams.has('message')) {
       console.log(urlParams.get('message'));
       $('#messageAction').html(urlParams.get('message'));
       $('#myFirstLogin').modal('show');
     }
 
+    // by default button register and update password hidden
     $('#btnRegister').hide();
     $('#btnUpdateRegister').hide();
     
+    // for form update password update password field disabled
+    // you must be filled in current password
     $('#updatePassword').attr('disabled', true);
     $('#updateConfirmPassword').attr('disabled', true);
 
-    $('#txtSearching').on('keydown', function(e) {
-      if(e.key == 'Enter') {
-        var keyword = $(this).val();
-        $.ajax({
-          url: baseUrlOrigin+'/<?= $BASEAPP;?>/api/indexsearch.php',
-          type: 'POST',
-          data: 'keyword='+keyword,
-          success: function(result) {
-            var html = "<h4>You Search: '"+keyword+"'</h4>";
-            var jsonParse = JSON.parse(result);
-            jsonParse.result.forEach( function(element, index) {
-              html += '<div class="row">';
-                html +='<div class="col-sm-6 col-md-3">';
-                    html +='<div class="thumbnail">';
-                      html +='<img src="/<?= $BASEAPP;?>/img/'+element.main_image+'" alt="Title">';
-                      html +='<div class="caption">';
-                        html +='<h3>'+element.property_title+'</h3>';
-                        html +='<p>';
-                          html +='<b>Price : </b> '+element.price+'<br>';
-                          html +='<b>Size : </b> '+element.size+'<br>';
-                          html +='<b>Phone : </b> '+element.owner_phone+'<br>';
-                        html +='</p>';
-                        html +='<p>';
-                          html +='<a href="/<?= $BASEAPP;?>/moreproperties.php?id='+element.id+'" class="btn btn-primary" role="button">More</a>&nbsp;';
-                            html +='<a href="/<?= $BASEAPP;?>/config/addfavorite.php?item='+element.id+'" class="btn btn-default" role="button">Favorite</a>';
-                        html +='</p>';
-                      html +='</div>';
-                    html +='</div>';
-              html += '</div>';
-            });
-            $('#resultSearch').html(html);
-          }
-        })
-      }
-    });
-
+    // for searching integrated with elasticsearch
     $('#btnApply').on('click', function() {
       var statusLogin = $('#statusLogin').val();
       var keywords = $('#txt_keywords').val();
@@ -223,9 +196,12 @@
       var petFriendly = $('input[name=pet_friendly]:checked').val();
 
       var formData = {
-        keywords: keywords, price: price, bedroom: bedroom, bathroom: bathroom, furnished: furnished, petFriendly: petFriendly
+        keywords: keywords, price: price, bedroom: bedroom, 
+        bathroom: bathroom, furnished: furnished, petFriendly: petFriendly
       };
 
+      // access ajax for get result for elasticsearch after that 
+      // we rendered to html
       $.ajax({
         url: baseUrlOrigin+'/<?= $BASEAPP;?>/api/indexmulti.php',
         type: 'GET',
@@ -264,6 +240,8 @@
       })
     })
 
+    // at register if password not match with confirm password
+    // button register not showing, vice versa
     $('#regConfirmPassword').on('keyup', function(){
       var pass = $('#regPassword').val();
       if(pass == $(this).val()){
@@ -273,6 +251,7 @@
       }
     })
 
+    // this action for process check password before you update the password
     $('#currentPassword').on('keyup', function() {
       var curr = $(this).val();
       $.ajax({
@@ -291,24 +270,12 @@
       })
     })
 
-    $('#updateConfirmPassword').on('keyup', function(){
-      var pass = $('#updatePassword').val();
-      if(pass == $(this).val()){
-        $('#btnUpdateRegister').show();
-      } else {
-        $('#btnUpdateRegister').hide();
-      }
-    })
-
+    // modal for action deactive account user customer
     $('#btnDeactiveAccount').on('click', function(e) {
       e.preventDefault();
-      var konfirm = confirm('Are you sure to deactive this account?');
-      if(konfirm) {
-        alert('Account has been deactive.');
-        location.href = '/<?= $BASEAPP;?>/config/deactive.php?action=yes';
-      } else {
-        alert('Action Canceled.');
-      }
+      $('#lblConfirmDeactive').html('Are you sure to deactive this account?');
+      $('#hrefConfirmDeactive').attr('href', '/<?= $BASEAPP;?>/config/deactive.php?action=yes');
+      $('#myModalConfirmDeactive').modal('show');
     })
   })
 </script>
@@ -339,6 +306,7 @@
     FB.getLoginStatus(function(response) {
       FB.api('/me', {fields: 'name,email' }, function(response) {
         if(response.hasOwnProperty('email') && response.hasOwnProperty('name')) {
+          // process for sign in with facebook
           $.ajax({
             url: baseUrl+'/<?= $BASEAPP;?>/api/login.php',
             data: 'name='+response.name+'&email='+response.email,

@@ -5,25 +5,32 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require '../vendor/autoload.php';
 
+/**
+* declare function for registration email
+* params $to = email of receiver
+* params $name = name of receiver
+* params $subject = subject email
+* params $body = body email
+*/
 function sendEmail($to, $name, $subject, $body) {
     $mail = new PHPMailer(true);
     try {
         //Server settings
-        // $mail->SMTPDebug = 2;                                       // Enable verbose debug output
-        $mail->isSMTP();                                            // Set mailer to use SMTP
-        $mail->Host       = 'mail.carsworld.co.id';  // Specify main and backup SMTP servers
-        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'ahmad.ardiansyah@carsworld.id';               // SMTP username
-        $mail->Password   = 'bintraco1!';                         // SMTP password
-        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-        $mail->Port       = 587;                                    // TCP port to connect to
+        // $mail->SMTPDebug = 2;                    // Enable verbose debug output
+        $mail->isSMTP();                            // Set mailer to use SMTP
+        $mail->Host       = 'smtp.gmail.com';       // Specify main and backup SMTP servers
+        $mail->SMTPAuth   = true;                   // Enable SMTP authentication
+        $mail->Username   = 'eflatsau@gmail.com';   // SMTP username
+        $mail->Password   = 'P@ssw0rdeFlats';       // SMTP password
+        $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+        $mail->Port       = 587;                    // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('ahmad.ardiansyah@carsworld.id', 'Mailer');
-        $mail->addAddress($to, $name);                              // Add a recipient
+        $mail->setFrom('eflatsau@gmail.com', 'Mailer');
+        $mail->addAddress($to, $name);               // Add a recipient
 
         // Content
-        $mail->isHTML(true);                                        // Set email format to HTML
+        $mail->isHTML(true);                         // Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $body;
 

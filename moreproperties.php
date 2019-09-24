@@ -27,6 +27,7 @@ require 'config/db.php';
       <div class="row">
         <div class="col-sm-12">
             <?php
+            // get detail view of property
             if(isset($_GET['id'])) {
                 $get = $db->query("SELECT * FROM properties WHERE id = '".$_GET['id']."'")->fetch_assoc();
             } else {
@@ -76,14 +77,7 @@ require 'config/db.php';
                     <input disabled value="<?=$get['property_title'];?>" name="property_title" type="text" class="form-control" placeholder="Enter Title" required>
                 </div>
             </div>
-            <?php if(!isset($_GET['id'])) { ?>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="email">Property Main Photo: </label>
-                <div class="col-sm-6">
-                    <input name="main_image" type="file" class="form-control" required>
-                </div>
-            </div>
-            <?php } ?>
+    
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Rent Per Week: </label>
                 <div class="col-sm-6">

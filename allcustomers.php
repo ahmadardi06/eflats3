@@ -47,6 +47,7 @@ require 'config/db.php';
           </thead>
           <tbody>
             <?php
+            // get all customer for user admin
             $query = $db->query("SELECT * FROM customer ORDER BY customer_id DESC");
             $getNumRows = $query->num_rows; $n = 0;
             while($rows = $query->fetch_assoc()) { $n++; ?>
@@ -58,12 +59,16 @@ require 'config/db.php';
                 <td><?= $rows['email'];?></td>
                 <td><?= ($rows['active'] == '1') ? 'Active' : 'Deactive';?></td>
                 <td>
+                  <!-- if active is 1 mean active so we show button deactive -->
                   <?php if($rows['active'] == '1') { ?>
                     <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=deactive&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-info">deactive</a>
+
+                  <!-- if active is 0 mean deactive so we show button active -->
                   <?php } else { ?>
                     <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=active&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-info">active</a> 
                   <?php } ?>
-                  <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=deleteuser&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-danger">delete</a>
+                  
+                  <a href="/<?= $BASEAPP;?>/config/processproperties.php?action=deletecustomer&id=<?=$rows['customer_id'];?>" class="btn btn-sm btn-danger">delete</a>
                 </td>
               </tr>
             <?php } ?>

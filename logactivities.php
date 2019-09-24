@@ -44,6 +44,7 @@ require 'config/db.php';
           </thead>
           <tbody>
             <?php
+            // showing log all activities
             $query = $db->query("SELECT * FROM logs ORDER BY log_id DESC");
             $getNumRows = $query->num_rows; $n = 0;
             while($rows = $query->fetch_assoc()) { $n++; ?>

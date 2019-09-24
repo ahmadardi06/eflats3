@@ -50,6 +50,7 @@ require 'config/db.php';
           </thead>
           <tbody>
             <?php
+            // list all properties
             $query = $db->query("SELECT * FROM properties WHERE author_id = '".$_SESSION['userId']."' ORDER BY id DESC");
             $getNumRows = $query->num_rows; $n = 0;
             while($rows = $query->fetch_assoc()) { $n++; ?>

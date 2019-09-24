@@ -34,6 +34,9 @@ require 'config/db.php';
         </div>
         <div class="row">
         <?php
+        // list of all the property that I have made myself
+        // $_SESSION['userId'] = '2'
+        // author_id = '2'
         $query = $db->query("SELECT * FROM properties WHERE author_id = '".$_SESSION['userId']."' ORDER BY id DESC");
         $getNumRows = $query->num_rows;
         while($rows = $query->fetch_assoc()) { 

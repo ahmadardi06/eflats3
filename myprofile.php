@@ -26,6 +26,7 @@ require 'config/db.php';
     	<div class="row">
     		<div class="col-sm-12">
     			<h4>My Profile</h4>
+                <!-- get all information of user sign in -->
                 <hr>
                 <?php 
                 $table = ''; $fieldId = '';

@@ -33,6 +33,7 @@ require 'config/db.php';
     </div>
     <div class="row">
         <?php
+        // display my favorites from table favorites
         $query = $db->query("SELECT f.*, p.* FROM favorites f JOIN properties p ON p.id = f.property_id WHERE f.customer_id = '".$_SESSION['userId']."' ORDER BY f.id DESC");
         $getNumRows = $query->num_rows;
         while($rows = $query->fetch_assoc()) { ?>

@@ -54,15 +54,22 @@ require 'config/db.php';
             $query = $db->query("SELECT * FROM properties ORDER BY id DESC");
             $getNumRows = $query->num_rows; $n = 0;
             while($rows = $query->fetch_assoc()) { $n++; 
+
+              // this process to get username for table admin or customer
               if($rows['level'] == 'customer') {
+                // condition for level customer
                 $getAuthor = $db->query("SELECT username FROM customer WHERE customer_id = '".$rows['author_id']."'")->fetch_assoc();
               } else {
+                // condition for level admin
                 $getAuthor = $db->query("SELECT username FROM admin WHERE admin_id = '".$rows['author_id']."'")->fetch_assoc();
               }
               ?>
               <tr>
                 <td><?= $n;?></td>
+
+                <!-- show the username -->
                 <td><?= $getAuthor['username'];?></td>
+                
                 <td><?= $rows['property_title'];?></td>
                 <td><?= $rows['price'];?></td>
                 <td><?= $rows['size'];?></td>

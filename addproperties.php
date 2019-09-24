@@ -53,6 +53,9 @@ require 'config/db.php';
                     <input value="<?=$get['property_title'];?>" name="property_title" type="text" class="form-control" placeholder="Enter Title" required>
                 </div>
             </div>
+
+            <!-- condition for if field not empty file input not shown -->
+            <!-- only create new file input showing -->
             <?php if(!isset($_GET['id'])) { ?>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Property Main Photo: </label>
@@ -61,6 +64,7 @@ require 'config/db.php';
                 </div>
             </div>
             <?php } ?>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Rent Per Week: </label>
                 <div class="col-sm-6">

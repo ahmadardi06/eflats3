@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2019 at 10:27 AM
+-- Generation Time: Sep 24, 2019 at 05:56 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -49,11 +49,11 @@ INSERT INTO `admin` (`admin_id`, `username`, `password`) VALUES
 
 CREATE TABLE `customer` (
   `customer_id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `extension` int(4) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `extension` int(4) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `phonenumber` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -71,7 +71,8 @@ INSERT INTO `customer` (`customer_id`, `username`, `first_name`, `last_name`, `e
 (4, '6212', 'test', 'test', 4622, '05a671c66aefea124cc08b76ea6d30bb', NULL, NULL, NULL, 1),
 (5, 'Prince', 'Prince', 'Virk', 7878, '408510cdb8555d877990f70f02286843', NULL, NULL, NULL, 1),
 (6, 'ardiansyah3ber', 'Ahmad', 'Ardiansyah', 6, 'be20ec6ed8731979e1fb58ea325a05c5', '082334093822', 'ahmad.ardi06@gmail.com', 'Jl. Smapal No.46 Lengkong Gudang BSD Serpong Tangerang Selatan', 1),
-(8, 'ardiansyah3ber@gmail.com', 'Ahmad', 'Ardiansyah', 676, '', '082334093822', 'ardiansyah3ber@gmail.com', 'Jl. Smapal No.46 Lengkong Gudang, Serpong, Tangerang Selatan.', 1);
+(8, 'ardiansyah2ber@gmail.com', 'Ahmad', 'Ardiansyah', 676, '', '082334093822', 'ardiansyah2ber@gmail.com', 'Jl. Smapal No.46 Lengkong Gudang, Serpong, Tangerang Selatan.', 1),
+(9, 'ardiansyah3ber', 'Ahmad', 'Ardiansyah', 0, 'be20ec6ed8731979e1fb58ea325a05c5', '', 'ardiansyah3ber@gmail.com', '', 0);
 
 -- --------------------------------------------------------
 
@@ -85,6 +86,13 @@ CREATE TABLE `favorites` (
   `property_id` int(11) NOT NULL,
   `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`id`, `customer_id`, `property_id`, `create_at`) VALUES
+(1, 6, 16, '2019-09-23 11:40:52');
 
 -- --------------------------------------------------------
 
@@ -177,7 +185,31 @@ INSERT INTO `logs` (`log_id`, `log_time`, `log_ip`, `log_details`) VALUES
 (71, '2019-09-22 10:14:31', '::1', 'User customer ID 8 Updated'),
 (72, '2019-09-22 10:15:35', '::1', 'Admin Login'),
 (73, '2019-09-22 10:24:25', '::1', 'Customer ID 6 Login'),
-(74, '2019-09-22 10:26:20', '::1', 'User customer ID 6 Create New Property');
+(74, '2019-09-22 10:26:20', '::1', 'User customer ID 6 Create New Property'),
+(75, '2019-09-23 05:31:55', '10.1.70.195', 'Customer ID 6 Login'),
+(76, '2019-09-23 06:04:44', '10.1.70.195', 'Customer ID 6 Login'),
+(77, '2019-09-23 06:05:28', '10.1.70.195', 'Customer ID 6 Login'),
+(78, '2019-09-23 06:05:59', '10.1.70.195', 'Customer ID 6 Login'),
+(79, '2019-09-23 06:53:08', '10.1.70.195', 'Customer ID 6 Login'),
+(80, '2019-09-23 06:53:27', '10.1.70.195', 'User customer ID 6 Update Property'),
+(81, '2019-09-23 06:53:38', '10.1.70.195', 'User customer ID 6 Update Property'),
+(82, '2019-09-23 06:55:15', '10.1.70.195', 'Customer ID 6 Login'),
+(83, '2019-09-23 06:55:34', '10.1.70.195', 'User customer ID 6 Update Property'),
+(84, '2019-09-23 06:55:50', '10.1.70.195', 'User customer ID 6 Update Property'),
+(85, '2019-09-23 09:48:02', '::1', 'Customer ID 6 Login'),
+(86, '2019-09-23 09:59:28', '::1', 'User customer ID 6 Create New Property'),
+(87, '2019-09-23 11:07:33', '::1', 'User customer ID 6 Create New Property'),
+(88, '2019-09-23 11:40:52', '::1', 'User Customer 6 Add Favorite 16'),
+(89, '2019-09-23 11:44:51', '::1', 'User customer ID 6 Create New Property'),
+(90, '2019-09-23 11:47:11', '::1', 'Admin Login'),
+(91, '2019-09-23 11:48:30', '::1', 'User admin ID 1 Create New Property'),
+(92, '2019-09-23 12:00:59', '::1', 'User admin ID 1 Update Property'),
+(93, '2019-09-23 16:37:21', '::1', 'New Customer Created'),
+(94, '2019-09-24 04:30:46', '::1', 'Customer ID 6 Login'),
+(95, '2019-09-24 05:07:58', '::1', 'Customer ID 6 Login'),
+(96, '2019-09-24 05:08:26', '::1', 'User customer ID 6 Update Property'),
+(97, '2019-09-24 05:11:40', '::1', 'Admin Login'),
+(98, '2019-09-24 05:12:03', '::1', 'User admin ID 1 Update Property');
 
 -- --------------------------------------------------------
 
@@ -235,12 +267,13 @@ CREATE TABLE `properties` (
 
 INSERT INTO `properties` (`id`, `property_title`, `main_image`, `address`, `description`, `price`, `size`, `owner_name`, `owner_phone`, `owner_email`, `bedroom`, `bathroom`, `furnished`, `pet_friendly`, `author_id`, `level`, `status`) VALUES
 (16, 'Best house', 'download.jpg', 'beach houes road, BHR', 'This Flat in good Condition .It Has Two bed Room and Gas Connection available in this room.', '10000', 1500, 'VJ', '042878782', 'vj@vj.com', '3', '1', 'Yes', 'Yes', 1, 'admin', 2),
-(18, 'test1', 'download.jpg', '', 'Good Experience detail', '1088', 500, 'VJ', '2147483647', 'vj@gmail.com', '4 Bedrooms', '2 Bathrooms', 'No', 'Yes', 1, 'admin', 0),
 (19, 'test', 'house1.jpg', 'Address1', 'best house that you can find. ', '10', 100, 'Amrit', '12404139994', 'amrit@gmail.com', '1', '1', 'Yes', 'Yes', 1, 'admin', 0),
 (20, 'test', 'house2.jpg', '11', 'great house', '1250', 11, 'VJ', '1', '23@gmail.com', '1', '1', 'No', 'Yes', 1, 'admin', 0),
 (21, 'Tree house', 'tree house.jpg', 'tree', 'its on a tree with a swimming pool connected', '540', 450, 'Amrit', '9939393944', 'amrit@amrit.com', '2', '0', 'Yes', 'Yes', 1, 'admin', 2),
-(23, 'Ardiansyah Property', 'house2.jpg', 'Address Property', 'Description property', '3000', 150, 'Ahmad Ardiansyah', '082334093822', 'ardiansyah3ber@gmail.com', '3', '2', 'Yes', 'Yes', 6, 'customer', 2),
-(25, 'Ahmad Property', '20190922102620-photo-galleryagain-new-house-.5d78f507149734.53783286.jpg', 'Jl. Smapal No.46 Lengkong Gudang, Serpong, Tangerang Selatan', 'Deskripsi Property Ahmad Ardiansyah, Great Property.', '4500', 120, 'Ahmad Ardiansyah', '082334093822', 'ardiansyah3ber@gmail.com', '4', '2', 'No', 'Yes', 6, 'customer', 2);
+(23, 'Ardiansyah', 'house2.jpg', 'Address Property', 'Description property', '3000', 150, 'Ahmad Ardiansyah', '08233', 'ardiansyah3ber@gmail.com', '3', '2', 'Yes', 'Yes', 6, 'customer', 2),
+(25, 'Ahmad', '20190922102620-photo-galleryagain-new-house-.5d78f507149734.53783286.jpg', 'Jl. Smapal No.46 Lengkong Gudang, Serpong, Tangerang Selatan', 'Deskripsi Property Ahmad Ardiansyah, Great Property.', '4600', 120, 'Ahmad Ardiansyah', '0823340', 'ardiansyah3ber@gmail.com', '4', '2', 'No', 'No', 6, 'customer', 2),
+(28, 'Multiple', '20190923114451-bd1.jpg,20190923114451-bd2.jpg', 'Jl. Smapal No 40, Lenkong Gudang, BSD Serpong.', 'This is my property', '4500', 120, 'Ahmad Ardiansyah', '082334', 'ardiansyah3ber@gmail.com', '4', '2', 'No', 'Yes', 6, 'customer', 2),
+(29, 'Adminple', '20190923120058-docker1.JPG,20190923120058-docker2.JPG', 'Ketewel Timur RT007 RT006 Sememu Pasirian', 'Description from admin', '5500', 120, 'Kapolres', '0823340', 'ardiansyah3ber@gmail.com', '4', '2', 'No', 'Yes', 1, 'admin', 2);
 
 -- --------------------------------------------------------
 
@@ -340,19 +373,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `photogallery`
@@ -364,7 +397,7 @@ ALTER TABLE `photogallery`
 -- AUTO_INCREMENT for table `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `properties_images`

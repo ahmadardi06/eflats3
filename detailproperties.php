@@ -47,6 +47,7 @@ require 'config/db.php';
             <h5><b>Information Property</b></h5>
             <hr>
 
+            <!-- cause main_image support multiple file so must be explode by commas -->
             <?php $expPhoto = explode(',', $get['main_image']); ;?>
             <div id="carousel-generic" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
@@ -81,50 +82,49 @@ require 'config/db.php';
                     <input disabled value="<?=$get['property_title'];?>" name="property_title" type="text" class="form-control" placeholder="Enter Title" required>
                 </div>
             </div>
-            <?php if(!isset($_GET['id'])) { ?>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="email">Property Main Photo: </label>
-                <div class="col-sm-6">
-                    <input name="main_image" type="file" class="form-control" required>
-                </div>
-            </div>
-            <?php } ?>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Rent Per Week: </label>
                 <div class="col-sm-6">
                     <input disabled value="<?=$get['price'];?>" name="price" type="text" class="form-control" placeholder="Enter Price" required>
                 </div>
             </div>
+            
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Size Square Foot: </label>
                 <div class="col-sm-6">
                     <input disabled value="<?=$get['size'];?>" name="size" type="text" class="form-control" placeholder="Enter Size" required>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Address: </label>
                 <div class="col-sm-6">
                     <textarea disabled class="form-control" name="address" placeholder="Enter Address" required><?=$get['address'];?></textarea>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Bedrooms: </label>
                 <div class="col-sm-6">
                     <input disabled value="<?=$get['bedroom'];?>" name="bedroom" type="text" class="form-control" placeholder="Enter Bedrooms" required>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Bathrooms: </label>
                 <div class="col-sm-6">
                     <input disabled value="<?=$get['bathroom'];?>" name="bathroom" type="text" class="form-control" placeholder="Enter Bathrooms" required>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Is Furnished: </label>
                 <div class="col-sm-6">
                     <input disabled value="<?=$get['furnished'];?>" name="bathroom" type="text" class="form-control" placeholder="Enter Bathrooms" required>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Is Pet Firendly: </label>
                 <div class="col-sm-6">
@@ -141,12 +141,14 @@ require 'config/db.php';
                     <input disabled value="<?=$get['owner_name'];?>" name="owner_name" type="text" class="form-control" placeholder="Enter Owner Name" required>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Owner Email: </label>
                 <div class="col-sm-6">
                     <input disabled value="<?=$get['owner_email'];?>" name="owner_email" type="text" class="form-control" placeholder="Enter Owner Email" required>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Owner Phone: </label>
                 <div class="col-sm-6">
@@ -163,12 +165,14 @@ require 'config/db.php';
                     <textarea disabled rows="6" class="form-control" name="description" placeholder="Enter Description" required><?=$get['description'];?></textarea>
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <a href="/<?= $BASEAPP;?>/addproperties.php?id=<?=$get['id'];?>" class="btn btn-success">Update Properties</a>
                     <a href="/<?= $BASEAPP;?>/manproperties.php" class="btn btn-default">Back</a>
                 </div>
             </div>
+            
           </form>
           </div>
         </div>

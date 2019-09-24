@@ -1,6 +1,8 @@
 <?php
 session_start();
 require 'config/db.php';
+
+// this file serves for search the property
 ?>
 <!doctype html>
 <html lang="en">

@@ -40,13 +40,16 @@ require 'config/db.php';
       <div class="row">
         <h3 class="text-center">New Coming</h3><br>
         <?php
+        // display the data default order by id descending
         $query = $db->query("SELECT * FROM properties WHERE status = '2' ORDER BY id DESC");
         $getNumRows = $query->num_rows;
         while($rows = $query->fetch_assoc()) { 
+          // explode main_image value to an array
           $expImage = explode(',', $rows['main_image']);
           ?>
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
+              <!-- get first main_image -->
               <img src="/<?= $BASEAPP;?>/img/<?= $expImage[0];?>" alt="Title">
               <div class="caption">
                 <h3><?= $rows['property_title'];?></h3>
@@ -57,11 +60,16 @@ require 'config/db.php';
                 </p>
                 <p>
                   <a href="/<?= $BASEAPP;?>/moreproperties.php?id=<?= $rows['id'];?>" class="btn btn-primary" role="button">More</a> 
+
+                  <!-- if session userId is not empty so showing button favorites with link -->
                   <?php if(isset($_SESSION['userId'])) { ?>
                     <a href="/<?= $BASEAPP;?>/config/addfavorite.php?item=<?= $rows['id'];?>" class="btn btn-default" role="button">Favorite</a>
+                  
+                  <!-- else session userId is empty so showing button favorites with popup -->
                   <?php } else { ?>
                     <a href="#" data-toggle="modal" data-target="#myFirstLogin" class="btn btn-default" role="button">Favorite</a>
                   <?php } ?>
+
                 </p>
               </div>
             </div>

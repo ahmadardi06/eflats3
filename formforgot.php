@@ -38,6 +38,7 @@ require 'config/db.php';
                     </div>
                 </div>
             </form>
+            <!-- for handle method POST update new password from link update password -->
             <?php if(isset($_POST['submit'])) { ?>
                 <?php
                     $password = md5($_POST['password']);
