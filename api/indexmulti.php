@@ -7,7 +7,11 @@ $hosts = [
 	'http://elk.carsworld.co.id:9200'
 ];
 
-$client = ClientBuilder::create()->setHosts($hosts)->build();
+$clientBuilder = ClientBuilder::create();
+$clientBuilder->setHosts($hosts);
+
+$client = $clientBuilder->build();
+
 
 if(isset($_GET['keywords'])) {
   
