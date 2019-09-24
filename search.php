@@ -36,6 +36,24 @@ require 'config/db.php';
           <h3><b>Filter</b></h3>
           <div class="panel panel-default">
             <div class="panel-body">
+              <form method="GET" action="/<?= $BASEAPP;?>/search.php">
+                <input type="hidden" name="keywords" value="<?= $_GET['keywords'];?>">
+                <div class="form-group">
+                  <label for="formControlRange">Sort By</label>
+                  <select class="form-control" id="sortSearch" name="sortSearch">
+                    <option value="price">Price</option>
+                  </select>
+                  <select style="margin-top: 10px;" class="form-control" id="sortType" name="sortType">
+                    <option value="ASC">Lower to Higher</option>
+                    <option value="DESC">Higher to Lower</option>
+                  </select>
+                </div>
+                <input type="submit" name="submit" value="search" class="btn btn-primary">
+              </form>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
               <div>
                 <input type="hidden" id="txt_keywords" name="keywords" value="<?= $_GET['keywords'];?>">
                 <input type="hidden" id="statusLogin" name="statusLogin" value="<?= isset($_SESSION['level']) ? 'true': 'false';?>">
@@ -94,7 +112,10 @@ require 'config/db.php';
         if(isset($_GET['bathroom']) && $_GET['bathroom'] != '0') $sql .= " AND bathroom = '".$_GET['bathroom']."'";
         if(isset($_GET['bedroom']) && $_GET['bathroom'] != '0') $sql .= " AND bedroom = '".$_GET['bedroom']."'";
         
-        $sql .= " AND status = '2' ORDER BY id DESC";
+        $sql .= " AND status = '2'";
+        if(isset($_GET['sortSearch'])) $sql .= " ORDER BY ".$_GET['sortSearch'];
+        if(isset($_GET['sortType'])) $sql .= " ".$_GET['sortType'];
+
         $query = $db->query($sql);
         $getNumRows = $query->num_rows;
         ?>
