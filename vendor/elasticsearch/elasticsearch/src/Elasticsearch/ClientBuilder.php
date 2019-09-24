@@ -24,6 +24,9 @@ use GuzzleHttp\Ring\Client\CurlMultiHandler;
 use GuzzleHttp\Ring\Client\Middleware;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Processor\IntrospectionProcessor;
 
 /**
  * Class ClientBuilder
@@ -686,7 +689,7 @@ class ClientBuilder
 
     private function prependMissingScheme(string $host): string
     {
-        if (!preg_match("/^https?:\/\//", $host)) {
+        if (!filter_var($host, FILTER_VALIDATE_URL)) {
             $host = 'http://' . $host;
         }
 

@@ -61,7 +61,7 @@ class ElasticSearchClient
     public function getClient()
     {
         $hosts = [
-            'http://elk.carsworld.co.id:9200'
+            'elk.carsworld.co.id:9200'
         ];
         return ClientBuilder::create()->setHosts($hosts)->build();
     }

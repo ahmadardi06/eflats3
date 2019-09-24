@@ -5,7 +5,7 @@ require __DIR__."/../vendor/autoload.php";
 use Elasticsearch\ClientBuilder;
 
 $hosts = [
-	'http://elk.carsworld.co.id:9200'
+	'elk.carsworld.co.id:9200'
 ];
 
 $clientBuilder = ClientBuilder::create();
