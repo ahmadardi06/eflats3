@@ -2,6 +2,9 @@
 ini_set('display_errors', 1);
 session_start();
 require 'config/db.php';
+
+// for updated data from mysql to elasticsearch
+require 'api/indexall.php';
 ?>
 <!doctype html>
 <html lang="en">
